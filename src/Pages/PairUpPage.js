@@ -36,17 +36,20 @@ export default function PairUp() {
     const pairKeyQuery = child(pairKeyRef, pairKeyCreate);
     const timestamp = new Date().getTime();
 
-    update(pairKeyRef, {
-      [timestamp]: pairKeyCreate,
-    });
+  
     get(pairKeyQuery)
       .then((snapshot) => {
+        const snapshotVal = snapshot.val()
+        console.log(snapshotVal)
+        console.log(snapshot)
+        console.log(snapshot.key)
         if (snapshot.exists()) {
-          console.log(snapshot);
           console.log("Pair Key Exists - create new pairkey");
         } else {
-          console.log(snapshot.val());
           console.log("Pair Key is Unique");
+          update(pairKeyRef, {
+            [timestamp]: pairKeyCreate,
+          });
           console.log("New Room Created");
           const roomRef = ref(database, pairKeyCreate);
           set(roomRef, {
