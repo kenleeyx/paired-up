@@ -1,8 +1,3 @@
-//tags: we want users to be able to tag posts(done)
-// and filter by these tags
-//on the feed page we can put in buttons for filters(map out tags)
-//store a set of tags in the account - no, we calculate the set of tags
-
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../App.js";
@@ -12,7 +7,6 @@ import { onChildAdded, onChildChanged, push, ref, onValue } from "firebase/datab
 import {Feed} from '../Components/Feed'
 import {Composer} from '../Components/Composer'
 
-const DB_FEED_KEY = "feed";
 const DUMMY_USERID = "dummyuser" // to use these as subs
 const DUMMY_PAIRID = 'dummypair' // to use these as subs
 
@@ -22,11 +16,13 @@ export default function FeedPage() {
   const [posts, setPosts] = useState([]); //assuming user info and isLoggedIn comes from context
   
   useEffect(() => { // whenever app renders
-    const postRef = ref(database, `${DB_FEED_KEY}/${DUMMY_PAIRID}`); //setup reference
+    const postRef = ref(database, `${DUMMY_PAIRID}/feed`); //setup reference
     onChildAdded(postRef, (data) => { //setup listener
       setPosts((prevPosts) => [...prevPosts, { key: data.key, val: data.val() }]);
     });
   }, []);
+
+
 
   return (
     <>
@@ -43,7 +39,14 @@ export default function FeedPage() {
           )}
         </header>
         <main>
-          <Composer />
+        <button onClick={() => document.getElementById("composer").showModal()}> + </button>
+        <dialog id="composer" className = "modal">
+        <form method="dialog">
+        <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">✕</button>
+        </form>
+        <Composer postContent = {null}/>
+        </dialog>
+          {/* <Composer postContent = {null} /> */}
           <Feed posts={posts} setPosts={setPosts} />
         </main>
       </div>

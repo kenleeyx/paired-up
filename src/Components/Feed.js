@@ -22,7 +22,7 @@ export function Feed(props) {
     return (
         <div>
             <div>
-                <FilterButtonHolder filters={availableFilters} setTagFilter = {setTagFilter}/>
+                <FilterButtonHolder currentFilters={tagFilter} filters={availableFilters} setTagFilter = {setTagFilter}/>
             </div>
             <div className='flex flex-row flex-wrap max-w-screen justify-center bg-red-300'>
                 {posts}

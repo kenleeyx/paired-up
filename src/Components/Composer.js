@@ -1,3 +1,5 @@
+// might want to create an edit post option also - need to change from push to update
+
 import { useState } from "react";
 import { database, storage } from "../firebase/firebase";
 import { ref as sRef, uploadBytes, getDownloadURL,} from 'firebase/storage';
@@ -7,12 +9,13 @@ const DB_FEED_KEY = "feed";
 const DUMMY_USERID = "dummyuser" // to use these as subs
 const DUMMY_PAIRID = 'dummypair' // to use these as subs
 
+//<Composer postContent = {post} />
 export function Composer(props) {
     const [formInfo, setFormInfo] = useState({
-        file: null,
-        postMessage: '',
-        date: null,
-        tags: '',
+        file: props.postContent ? props.postContent.val.file : null,
+        postMessage: props.postContent ? props.postContent.val.message : '',
+        date: props.postContent ? props.postContent.val.date : null,
+        tags: props.postContent ? props.postContent.val.tags : '',
     })
 
     const textChange = (e) => {
@@ -35,7 +38,7 @@ export function Composer(props) {
         uploadBytes(fileRef, formInfo.file)
           .then(() => getDownloadURL(fileRef))
           .then((url) => {
-            const messageListRef = ref(database, `${DB_FEED_KEY}/${DUMMY_PAIRID}`);
+            const messageListRef = ref(database, `${DUMMY_PAIRID}/feed`);
               push(messageListRef, {
                   user: DUMMY_USERID,
                   message: formInfo.postMessage,
@@ -56,7 +59,9 @@ export function Composer(props) {
           }); 
         };
 
-    return (<div>
+    return (
+    <div>
+    Do not edit posts with Composer yet - I need to update the database methods - KL
         <form onSubmit={writeData} className = 'flex bg-yellow-300 justify-center'>
             <input
                 type='text'
