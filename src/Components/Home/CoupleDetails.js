@@ -34,7 +34,7 @@ const CoupleDetails = () => {
   useEffect(() => {
     if (pairKey) {
       console.log("Pairkey", pairKey);
-      const roomRef = ref(database, pairKey);
+      const roomRef = ref(database, `rooms/${pairKey}`);
       const dateQuery = child(roomRef, "startDate");
       get(dateQuery).then((snapshot) => {
         if (snapshot.exists()) {

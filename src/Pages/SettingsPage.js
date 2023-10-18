@@ -61,7 +61,6 @@ export default function SettingsPage() {
     if (!profilePicture) {
       return;
     }
-    console.log("updating profile pic");
     const fileRef = sRef(storage, `userRef/${email}/profilePic`);
     uploadBytes(fileRef, profilePicture)
       .then(() => getDownloadURL(fileRef))
@@ -81,7 +80,6 @@ export default function SettingsPage() {
     if (!displayName) {
       return;
     }
-    console.log("updating display name");
     const displayNameRef = ref(
       database,
       `userRef/${currentUserKey}/displayName`,
@@ -90,7 +88,6 @@ export default function SettingsPage() {
       set(displayNameRef, displayName),
       updateProfile(auth.currentUser, { displayName: displayName }),
     ]).then(() => {
-      console.log("setting");
       setDisplayName("");
     });
   };
@@ -99,7 +96,6 @@ export default function SettingsPage() {
     if (!backgroundPicture) {
       return;
     }
-    console.log("updating background pic");
     const fileRef = sRef(storage, `rooms/${pairKey}/backgroundImage`);
     uploadBytes(fileRef, backgroundPicture)
       .then(() => getDownloadURL(fileRef))
@@ -122,15 +118,12 @@ export default function SettingsPage() {
     if (!startDate) {
       return;
     }
-    console.log("updating start date");
     if (pairKey) {
       const roomRef = ref(database, `rooms/${pairKey}`);
       const dateRef = child(roomRef, "startDate");
 
       set(dateRef, startDate)
-        .then(() => {
-          console.log("Start date updated successfully.");
-        })
+        .then(() => {})
         .catch((error) => {
           console.error("Error updating start date:", error);
         });
@@ -150,7 +143,6 @@ export default function SettingsPage() {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        console.log("Signed Out");
         navigate("/onboarding");
         context.setPairKey("");
         context.setEmail("");
@@ -167,7 +159,6 @@ export default function SettingsPage() {
 
     remove(roomRef)
       .then(() => {
-        console.log("Pairkey Deleted");
         navigate("/onboarding");
       })
       .catch((error) => {
@@ -193,7 +184,6 @@ export default function SettingsPage() {
               accept="image/*" // Allow only image files to be selected
               style={{ display: "none" }} // Hide the input element
               onChange={(e) => {
-                console.log(e.target.files);
                 setProfilePicture(e.target.files[0]);
                 setProfilePictureURL(URL.createObjectURL(e.target.files[0]));
               }}
