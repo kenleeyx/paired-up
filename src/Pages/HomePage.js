@@ -36,7 +36,6 @@ export default function HomePage() {
   const pairKey = ContextHelper("pairKey");
 
   const navigate = useNavigate();
-  // const isLoggedIn = ContextHelper("isLoggedIn");
 
   //Pull user data
   useEffect(() => {

@@ -1,9 +1,3 @@
-//-----------Todo-----------//
-/*
-- Pull the names of both the couples (displayName1 & 2)
-- Update the number of days the couple has been together
-- Import display images?
-*/
 //-----------React-----------//
 import { useState, useEffect } from "react";
 //-----------Firebase-----------//
@@ -25,21 +19,10 @@ const CoupleDetails = () => {
   //Import display photos
   const pairKey = ContextHelper("pairKey");
   const [days, setDays] = useState(null);
-  const [displayName, setDisplayName] = useState("");
   const [displayName1, setDisplayName1] = useState("");
   const [displayName2, setDisplayName2] = useState("");
-  const [profilePicture, setProfilePicture] = useState(null);
   const [profilePicture1, setProfilePicture1] = useState(null);
   const [profilePicture2, setProfilePicture2] = useState(null);
-
-  //Pull User Data
-  useEffect(() => {
-    const user = auth.currentUser;
-    if (user !== null) {
-      setDisplayName(user.displayName);
-      setProfilePicture(user.photoURL);
-    }
-  }, []);
 
   //Pull Display Names of both users from userRef
   useEffect(() => {
@@ -54,7 +37,6 @@ const CoupleDetails = () => {
     const profilePictures = [];
 
     try {
-      // Get the data asynchronously
       get(pairKeyQuery)
         .then((snapshot) => {
           if (snapshot.exists()) {
@@ -126,11 +108,11 @@ const CoupleDetails = () => {
 
       {pairKey ? (
         <>
-          <h1 className="text-center text-[1em]">
+          <h1 className="text-center text-[0.8em] sm:text-[1em]">
             {displayName1} & {displayName2}
           </h1>
 
-          <h1 className="text-center text-[2.6em] font-bold leading-none">
+          <h1 className="text-center text-[2em] font-bold leading-none sm:text-[2.6em]">
             {days} days
           </h1>
           <p className="text-[1em]">Together</p>
