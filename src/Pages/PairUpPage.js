@@ -111,17 +111,14 @@ export default function PairUp() {
 
   //Create - Check pairkey for isPairedUp to appear
   const checkPaired = () => {
-    console.log("Is runnign?");
     if (pairKeyCreate !== "") {
       const roomRef = ref(database, `rooms/${pairKeyCreate}`);
       const checkPairedQuery = child(roomRef, "isPairedUp");
       get(checkPairedQuery).then((snapshot) => {
-        // console.log("snapshot", snapshot);
         if (snapshot.exists()) {
-          console.log("PAIRED UP - redirect to main");
           navigate("/");
         } else {
-          console.log("Not paired up yet! Pls wait");
+          return;
         }
       });
     }
@@ -137,18 +134,15 @@ export default function PairUp() {
       get(pairKeyQuery)
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log("Join - Pair Key exists!");
             // Check email2 does not exist within pairkey room
             const roomRef = ref(database, `rooms/${pairKeyJoin}`);
             const emailQuery = child(roomRef, "email2");
 
             get(emailQuery).then((emailSnapshot) => {
               if (emailSnapshot.exists()) {
-                console.log("Joining failed - Pairkey room already filled");
                 setJoinMessage("❌ Join failed - Pair key already matched");
               } else {
                 navigate("/");
-                console.log("Join - Room is available");
                 //Add joining user data to pairkey room
                 return update(roomRef, {
                   displayName2: displayName,
@@ -170,7 +164,6 @@ export default function PairUp() {
             });
           } else {
             setJoinMessage("❌ Join failed - Pair key does not exist");
-            console.log("Join - Pair Key does NOT exist");
           }
         })
 

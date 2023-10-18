@@ -57,9 +57,9 @@ Contributors: Ignatius Tan, Gabriel Lim, Kenneth Lee
 
 (Login as user 2 - Email carl.fredricksen@pixar.com Pass paradisefalls)
 
+- Journal
 - Bucket List
 - Dates
-- Journal
 -
 - add to memories -> handover to kenneth
 

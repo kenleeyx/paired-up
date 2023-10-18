@@ -14,7 +14,7 @@ import SignInReminder from "../Components/Helpers/SignInReminder.js";
 //-----------Firebase-----------//
 import { auth, database, storage } from "../firebase/firebase";
 import { updateProfile, signOut } from "firebase/auth";
-import { ref, child, set, onValue } from "firebase/database";
+import { ref, child, set, onValue, remove } from "firebase/database";
 import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 //-----------Images-----------//
@@ -35,14 +35,8 @@ export default function SettingsPage() {
   const pairKey = ContextHelper("pairKey");
   const navigate = useNavigate();
 
-<<<<<<< HEAD
   useEffect(() => {
     //pull profile pic when component mounts
-    const email = "demo1@email.com"; // use temporary dummy email; this will be pulled from context in future
-=======
-  
-  useEffect(() => { //pull profile pic when component mounts
->>>>>>> 323c5a2403c5b1a792cad2c733a57b1996727457
     const userRef = ref(database, `userRef`); //setup reference
     onValue(userRef, (data) => {
       const val = data.val();
@@ -102,12 +96,7 @@ export default function SettingsPage() {
   };
 
   const updateBackgroundPicture = (e) => {
-<<<<<<< HEAD
-    const pairKey = "dummypair"; // for testing, to remove later
     if (!backgroundPicture) {
-=======
-    if(!backgroundPicture) {
->>>>>>> 323c5a2403c5b1a792cad2c733a57b1996727457
       return;
     }
     console.log("updating background pic");
@@ -130,12 +119,7 @@ export default function SettingsPage() {
   };
 
   const updateStartDate = () => {
-<<<<<<< HEAD
-    const pairKey = "dummypair"; // for testing, to remove later
     if (!startDate) {
-=======
-    if(!startDate) {
->>>>>>> 323c5a2403c5b1a792cad2c733a57b1996727457
       return;
     }
     console.log("updating start date");
@@ -177,26 +161,22 @@ export default function SettingsPage() {
       });
   };
 
-  // Wipe pair account -> Delete all couple data + navigate back to onboarding
-  // const deletePairKey = () => {
+  //Wipe pair account -> Delete all couple data + navigate back to onboarding
+  const deletePairKey = () => {
+    const roomRef = ref(database, `rooms/${pairKey}`);
 
-  //       const roomRef = ref(database, `rooms/${pairKey}`);
-
-  //       remove(roomRef, startDate)
-  //         .then(() => {
-  //           console.log("Start date updated successfully.");
-  //         })
-  //         .catch((error) => {
-  //           console.error("Error updating start date:", error);
-  //         });
-  //     } console.log("Account deleted");
-  //   };
-  //   navigate("/onboarding");
-  // };
+    remove(roomRef)
+      .then(() => {
+        console.log("Pairkey Deleted");
+        navigate("/onboarding");
+      })
+      .catch((error) => {
+        console.error("Error deleting pair key:", error);
+      });
+  };
 
   return (
     <div className=" flex h-screen flex-col items-center justify-center bg-background">
-      {console.log(auth.currentUser)}
       <NavBar label="Settings" />
       {isLoggedIn ? (
         <main className="flex flex-col items-center">
