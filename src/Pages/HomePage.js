@@ -49,15 +49,16 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-  if (pairKey) {
-    const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
-    onValue(userRef, (result) => {
-      const val = result.val()
-      if (val) {
-      setBackgroundImage(val.backgroundImageURL);
-      }
-    });
-  }},[pairKey])
+    if (pairKey) {
+      const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
+      onValue(userRef, (result) => {
+        const val = result.val();
+        if (val) {
+          setBackgroundImage(val.backgroundImageURL);
+        }
+      });
+    }
+  }, [pairKey]);
 
   // Redirect to sign in
   useEffect(
