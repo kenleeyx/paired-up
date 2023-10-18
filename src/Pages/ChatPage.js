@@ -9,8 +9,6 @@ import { ref, onValue } from "firebase/database";
 import background from "../Images/wallpaper.png";
 import ContextHelper from "../Components/Helpers/ContextHelper.js";
 
-
-
 export default function ChatPage() {
   //Pull in context from App.js asd
   const pairKey = ContextHelper("pairKey");
@@ -20,33 +18,37 @@ export default function ChatPage() {
   useEffect(() => {
     // whenever app renders asd
     if (pairKey) {
-    const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
-    onValue(userRef, (result) => {
-      const val = result.val()
-      if (val) {
-      setBackgroundImage(val.backgroundImageURL);
-      }
-    });
+      const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
+      onValue(userRef, (result) => {
+        const val = result.val();
+        if (val) {
+          setBackgroundImage(val.backgroundImageURL);
+        }
+      });
 
-    const postRef = ref(database, `rooms/${pairKey}/chat`); //setup reference
-    onValue(postRef, (data) => {
-      let dataArray = [];
-      if (data.val()) {
-        dataArray = Object.keys(data.val()).map((key) => {
-          return { key: key, val: data.val()[key] };
-        });
-      }
-      setChat(dataArray);
-    });
-  }
+      const postRef = ref(database, `rooms/${pairKey}/chat`); //setup reference
+      onValue(postRef, (data) => {
+        let dataArray = [];
+        if (data.val()) {
+          dataArray = Object.keys(data.val()).map((key) => {
+            return { key: key, val: data.val()[key] };
+          });
+        }
+        setChat(dataArray);
+      });
+    }
   }, [pairKey]);
 
   return (
     <div className="h-screen">
       <NavBar label="Chat" />
       <main
-        className="mt-[100px] mb-[50px] h-auto w-screen"
-        style={backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : null}
+        className="mb-[50px] mt-[100px] h-auto w-screen"
+        style={
+          backgroundImage
+            ? { backgroundImage: `url(${backgroundImage})` }
+            : null
+        }
       >
         <Chat chat={chat} />
         <ChatComposer />

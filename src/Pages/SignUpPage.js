@@ -53,8 +53,6 @@ export default function SignUpPage() {
           displayName: displayName,
           photoURL: profilePicture,
         });
-
-        console.log("User Profile Updated");
         setEmail("");
         setPassword("");
         navigate("/pair-up");

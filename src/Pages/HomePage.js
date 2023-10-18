@@ -1,6 +1,5 @@
 //-----------Todo-----------//
 /*
-- Make background image updates work
 - Remove state helper
 */
 //-----------Libraries-----------//
@@ -23,7 +22,6 @@ import ContextHelper from "../Components/Helpers/ContextHelper.js";
 //-----------Media-----------//
 import logo from "../Images/LogosIcons/logo.png";
 import person1 from "../Images/LogosIcons/person1.png";
-import background from "../Images/wallpaper.png";
 import bucketlist from "../Images/LogosIcons/word-icon-bucketlist.png";
 import chat from "../Images/LogosIcons/word-icon-chat.png";
 import memories from "../Images/LogosIcons/word-icon-memories.png";
@@ -38,7 +36,6 @@ export default function HomePage() {
   const pairKey = ContextHelper("pairKey");
 
   const navigate = useNavigate();
-  // const isLoggedIn = ContextHelper("isLoggedIn");
 
   //Pull user data
   useEffect(() => {
@@ -49,15 +46,16 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-  if (pairKey) {
-    const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
-    onValue(userRef, (result) => {
-      const val = result.val()
-      if (val) {
-      setBackgroundImage(val.backgroundImageURL);
-      }
-    });
-  }},[pairKey])
+    if (pairKey) {
+      const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
+      onValue(userRef, (result) => {
+        const val = result.val();
+        if (val) {
+          setBackgroundImage(val.backgroundImageURL);
+        }
+      });
+    }
+  }, [pairKey]);
 
   // Redirect to sign in
   useEffect(
@@ -105,8 +103,8 @@ export default function HomePage() {
           <AppButton src={memories} nav="/memories" />
           <AppButton src={dates} nav="/dates" />
           <AppButton src={bucketlist} nav="/bucket-list" />
-          <AppButton src={timeCapsule} />
           <AppButton src={journal} nav="/journal" />
+          <AppButton src={timeCapsule} />
         </nav>
       </main>
     </motion.div>
