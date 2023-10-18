@@ -107,7 +107,7 @@ export default function JournalListPage() {
               ) : (
                 <h1>- {journalItem.val.sign}</h1>
               )}
-              <hr className="my-[10px] rounded-full border-[1.5px] border-black" />
+              <hr className="my-[10px] rounded-full border-[1.5px] border-accent" />
               <p className="mb-[10px]">{journalItem.val.date}</p>
             </div>
           ))}
