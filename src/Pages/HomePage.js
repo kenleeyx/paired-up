@@ -1,6 +1,5 @@
 //-----------Todo-----------//
 /*
-- Make background image updates work
 - Remove state helper
 */
 //-----------Libraries-----------//
@@ -37,7 +36,6 @@ export default function HomePage() {
   const pairKey = ContextHelper("pairKey");
 
   const navigate = useNavigate();
-  // const isLoggedIn = ContextHelper("isLoggedIn");
 
   //Pull user data
   useEffect(() => {

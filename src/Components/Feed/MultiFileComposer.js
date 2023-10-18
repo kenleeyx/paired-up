@@ -33,7 +33,7 @@ export function MultiFileComposer(props) {
   });
 
   const [filePreviewArray, setFilePreviewArray] = useState(
-    props.postContent ? props.postContent.val.fileArray : [],
+    props.postContent ? props.postContent.val.files : [],
   );
 
   const textChange = (e) => {
