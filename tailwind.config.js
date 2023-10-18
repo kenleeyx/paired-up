@@ -2,12 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   daisyui: {
-    themes: [], //enable only light theme
+    themes: [{}],
   },
   theme: {
     extend: {
-      fontFamily: {
-        fontspring: ["Fontspring", "cursive"],
+      colors: {
+        background: "#f8f0e5",
+        window: "#eadbc8",
+        text: "#dac0a3",
+        accent: "#0f2c59",
       },
     },
   },

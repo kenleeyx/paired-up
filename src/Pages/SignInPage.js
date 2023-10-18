@@ -1,95 +1,81 @@
 //-----------React-----------//
-import { useState, useEffect, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { UserContext } from "../App.js";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+//-----------Components-----------//
+import SignInForm from "../Components/Onboarding/SignInForm.js";
+import NavBar from "../Details/NavBar.js";
+import Footer from "../Details/Footer.js";
 //-----------Firebase-----------//
 import { auth } from "../firebase/firebase";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 //-----------Images-----------//
-import profile from "../Images/upload.png";
+import person2 from "../Images/LogosIcons/person2.png";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState("");
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
-  const context = useContext(UserContext);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (userInfo) => {
+  const signIn = async () => {
+    try {
+      const userInfo = await signInWithEmailAndPassword(auth, email, password);
+      setEmail("");
+      setPassword("");
+      // setUser(userInfo);
       if (userInfo) {
-        console.log(userInfo);
-        // signed in user
-        context.setIsLoggedIn(true);
-      } else {
-        // no signed-in user
-        context.setIsLoggedIn(false);
+        navigate("/");
       }
-    });
-  }, []);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  const resetPassword = (e) => {
+    e.preventDefault();
+    setMessage("");
+    setErrorMessage("");
+    sendPasswordResetEmail(auth, email)
+      .then((response) => {
+        console.log("email sent");
+        console.log("email response?", response);
+        setMessage(`Reset password email has been sent to ${email}`);
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
+  };
 
   return (
     <>
-      <div className=" flex h-screen flex-col items-center justify-center">
+      <div className="flex h-screen flex-col items-center justify-center bg-background">
         <>
-          <header className="fixed top-0 flex w-screen flex-row items-center justify-between p-4">
-            <NavLink to="/onboarding" className="text-[2em]">
-              ←
-            </NavLink>
-            <p className="text-transparent">blank</p>
-          </header>
+          <NavBar nav="/onboarding" />
           <img
-            src={profile}
+            src={person2}
             alt="import profile"
-            className="h-[8em] rounded-full border-2 border-black p-2"
+            className="h-[8em] w-[8em] rounded-full border-2 border-black bg-white object-contain p-1"
           />
-          <h1 className="m-3 text-[2em] font-bold">Welcome back</h1>
-          <form>
-            <label>Email:</label>
-            <br />
-            <input
-              type="text"
-              className="input"
-              id="email"
-              placeholder="morty-smith@adultswim.com"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-            <br />
-            <label>Password:</label>
-            <br />
+          <h1 className="m-3 text-[2em] font-bold">Welcome back!</h1>
 
-            <input
-              type="password"
-              className="input"
-              id="password"
-              placeholder="********"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </form>
-          <br />
-          <button
-            className="btn"
-            onClick={async (e) => {
-              e.preventDefault();
-              signInWithEmailAndPassword(auth, email, password).then(
-                (userInfo) => {
-                  console.log(userInfo);
-                  setPassword("");
-                  setEmail("");
-                },
-              );
-              navigate("/");
-            }}
-          >
-            Signup
-          </button>
-          <NavLink to="/onboarding" className="m-3 text-slate-500">
-            Forgot password?{" "}
-          </NavLink>
+          <SignInForm
+            signIn={signIn}
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            resetPassword={resetPassword}
+            errorMessage={errorMessage}
+          />
+          {message && message}
         </>
+        <Footer />
       </div>
     </>
   );

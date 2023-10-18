@@ -1,38 +1,63 @@
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../App.js";
+//-----------React-----------//
+import { useState, useEffect } from "react";
+
+//-----------Firebase-----------//
+import { database } from "../firebase/firebase";
+import { ref, onValue } from "firebase/database";
+
+//-----------Components-----------//
+import NavBar from "../Details/NavBar.js";
+import { ChatComposer } from "../Components/Chat/ChatComposer";
+import { Chat } from "../Components/Chat/Chat";
+import ContextHelper from "../Components/Helpers/ContextHelper.js";
+
+//-----------Media-----------//
 
 export default function ChatPage() {
-  //Pull in context from App.js
-  const context = useContext(UserContext);
+  //Pull in context from App.js asd
+  const pairKey = ContextHelper("pairKey");
+  const [chat, setChat] = useState([]);
+  const [backgroundImage, setBackgroundImage] = useState(null);
+
+  useEffect(() => {
+    // whenever app renders asd
+    if (pairKey) {
+      const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
+      onValue(userRef, (result) => {
+        const val = result.val();
+        if (val) {
+          setBackgroundImage(val.backgroundImageURL);
+        }
+      });
+
+      const postRef = ref(database, `rooms/${pairKey}/chat`); //setup reference
+      onValue(postRef, (data) => {
+        let dataArray = [];
+        if (data.val()) {
+          dataArray = Object.keys(data.val()).map((key) => {
+            return { key: key, val: data.val()[key] };
+          });
+        }
+        setChat(dataArray);
+      });
+    }
+  }, [pairKey]);
 
   return (
-    <>
-      <div className=" flex h-screen flex-col items-center justify-center">
-        <header className="fixed top-0 flex w-screen flex-row items-center justify-between p-4">
-          <NavLink to="/" className="text-[2em]">
-            ←
-          </NavLink>
-          <p className="text-[2em]">Chat</p>
-          {context.isLoggedIn ? (
-            <p className="text-xs">Signed In</p>
-          ) : (
-            <p className="text-xs">Signed Out</p>
-          )}
-        </header>
-        <main>
-          <p>Insert Chat</p>
-          {context.isLoggedIn ? <p>Logged In</p> : <p>Logged Out</p>}
-          <button
-            className="btn"
-            onClick={() => {
-              context.setIsLoggedIn(!context.isLoggedIn);
-            }}
-          >
-            Switch
-          </button>
-        </main>
-      </div>
-    </>
+    <div className="h-screen">
+      <NavBar label="Chat" />
+      <main
+        className="mb-[50px] h-auto w-screen pt-[80px]"
+        style={
+          backgroundImage
+            ? { backgroundImage: `url(${backgroundImage})` }
+            : null
+        }
+      >
+        <Chat chat={chat} />
+        <p className="pt-[85px] text-transparent">blank</p>
+        <ChatComposer />
+      </main>
+    </div>
   );
 }

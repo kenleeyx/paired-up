@@ -1,53 +1,73 @@
 //-----------React-----------//
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-//-----------Firebase-----------//
-import { storage } from "../firebase/firebase";
-import { uploadBytes, ref as sRef, getDownloadURL } from "firebase/storage";
-import { auth } from "../firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-//-----------Images-----------//
+import { useNavigate } from "react-router-dom";
+//-----------Components-----------//
+import SignUpForm from "../Components/Onboarding/SignUpForm.js";
+import Button from "../Details/Button";
+import NavBar from "../Details/NavBar.js";
+import Footer from "../Details/Footer.js";
+import ProfileImage from "../Details/ProfileImage.js";
 
-import profile from "../Images/upload.png";
-import morty from "../Images/morty.png";
+//-----------Firebase-----------//
+import { storage, auth } from "../firebase/firebase";
+import { uploadBytes, ref as sRef, getDownloadURL } from "firebase/storage";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+//-----------Media-----------//
+import person1 from "../Images/LogosIcons/person1.png";
 
 export default function SignUpPage() {
   const [isFilled, setIsFilled] = useState(false);
-  const [name, setName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [signingUp, setSigningUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleNameChange = (event) => {
-    const newName = event.target.value;
-    setName(newName);
+  // Ensure that name input is filled before proceeding
+  const handleNameChange = (e) => {
+    let newName = e.target.value;
+    setDisplayName(newName);
     setIsFilled(newName.trim() !== "");
   };
 
   const handleImageUpload = (event) => {
-    console.log(event.target.files[0]);
     const file = event.target.files[0];
     setFile(file);
   };
 
+  const signUp = async () => {
+    try {
+      const userInfo = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+
+      if (userInfo) {
+        // Update user profile information
+        await updateProfile(userInfo.user, {
+          displayName: displayName,
+          photoURL: profilePicture,
+        });
+        setEmail("");
+        setPassword("");
+        navigate("/pair-up");
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  // Upload image to firebase and retrieve the photo
   useEffect(() => {
     if (file) {
       const fileRef = sRef(storage, `image/${file.name}`);
       uploadBytes(fileRef, file)
         .then(() => getDownloadURL(fileRef))
-        // .then((url) => {
-        //   // Add posts and final URL AFTER image URL is generated
-        //   push(postListRef, {
-        //     comment: comment,
-        //     date: `${new Date()}`,
-        //     image: url,
-        //   });
-        // })
-        // Clear input fields
         .then((url) => {
           setProfilePicture(url);
           setFile(null);
@@ -59,106 +79,61 @@ export default function SignUpPage() {
   }, [file]);
 
   return (
-    <>
-      <div className=" flex h-screen flex-col items-center justify-center">
-        <header className="fixed top-0 flex w-screen flex-row items-center justify-between p-4">
-          <NavLink to="/onboarding" className="text-[2em]">
-            ←
-          </NavLink>
-          <p className="text-transparent">blank</p>
-        </header>
-        {signingUp ? (
-          <>
-            <img
-              src={profilePicture ? profilePicture : morty}
-              alt="Profile"
-              className="h-[8em] rounded-full border-2 border-black p-1"
-            />
-            <h1 className="m-3 text-[2em] font-bold">Hello {name} </h1>
-            <form>
-              <label>Email:</label>
-              <br />
-              <input
-                type="text"
-                className="input"
-                id="email"
-                placeholder="morty-smith@adultswim.com"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-              <br />
-              <label>Password:</label>
-              <br />
-
-              <input
-                type="password"
-                className="input"
-                id="password"
-                placeholder="********"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
-            </form>
-            <br />
-            <button
-              className="btn"
-              onClick={async (e) => {
-                e.preventDefault();
-                createUserWithEmailAndPassword(auth, email, password).then(
-                  (userInfo) => {
-                    console.log(userInfo);
-                    setPassword("");
-                    setEmail("");
-                  },
-                );
-                navigate("/pair-up");
-              }}
-            >
-              Sign up
-            </button>
-            <NavLink to="/sign-in" className="m-3 text-slate-500">
-              sign in instead
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <h1 className="m-3 text-[2em] font-bold">
-              Upload your name and photo
-            </h1>
-            <label htmlFor="profile-picture" className="">
-              <img
-                src={profilePicture ? profilePicture : profile}
-                alt="Upload"
-                className="h-[8em] rounded-full border-2 border-black p-1"
+    <div className=" flex h-screen flex-col items-center justify-center bg-background">
+      <NavBar label="Sign Up" nav="/onboarding" />
+      {/* Sign Up form */}
+      {signingUp ? (
+        <>
+          <ProfileImage
+            src={profilePicture ? profilePicture : person1}
+            alt="Profile photo"
+          />
+          <h1 className="m-3 text-[1.5em] font-bold">Hello {displayName}!</h1>
+          <SignUpForm
+            signUp={signUp}
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            errorMessage={errorMessage}
+          />
+        </>
+      ) : (
+        <>
+          {/* Upload photo and name */}
+          <h1 className="m-3 p-2 text-center text-[1.5em] font-bold">
+            Upload a photo and tell me your name!
+          </h1>
+          <form className="flex flex-col items-center">
+            <label htmlFor="profile-picture" style={{ cursor: "pointer" }}>
+              <ProfileImage
+                src={profilePicture ? profilePicture : person1}
+                alt="Profile photo"
               />
             </label>
-
             <input
               type="file"
               id="profile-picture"
-              accept="image/*" // Allow only image files to be selected
-              style={{ display: "none" }} // Hide the input element
+              accept="image/*"
+              style={{ display: "none" }}
               onChange={handleImageUpload}
             />
-            <br />
-            <label>Your Name:</label>
-
+            <label className="mt-1">Your Name:</label>
             <input
               type="text"
-              className="input m-3 "
-              value={name}
+              className="input m-2 bg-white"
+              value={displayName}
               onChange={handleNameChange}
             ></input>
-            <button
-              className="btn disabled:text-slate-300"
-              onClick={setSigningUp}
-              disabled={!isFilled}
-            >
-              Next
-            </button>
-          </>
-        )}
-      </div>
-    </>
+          </form>
+          <Button
+            label="Next"
+            handleClick={setSigningUp}
+            disabled={!isFilled}
+          />
+        </>
+      )}
+      <Footer />
+    </div>
   );
 }
