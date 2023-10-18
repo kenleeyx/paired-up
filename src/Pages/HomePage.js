@@ -78,7 +78,8 @@ export default function HomePage() {
       }}
     >
       <nav className="fixed top-0 flex w-screen flex-row justify-between p-3">
-        <StateHelper />
+        {/* <StateHelper /> */}
+        <p className="text-transparent">123</p>
         <img
           src={logo}
           alt="import profile"
