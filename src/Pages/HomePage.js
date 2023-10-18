@@ -23,7 +23,6 @@ import ContextHelper from "../Components/Helpers/ContextHelper.js";
 //-----------Media-----------//
 import logo from "../Images/LogosIcons/logo.png";
 import person1 from "../Images/LogosIcons/person1.png";
-import background from "../Images/wallpaper.png";
 import bucketlist from "../Images/LogosIcons/word-icon-bucketlist.png";
 import chat from "../Images/LogosIcons/word-icon-chat.png";
 import memories from "../Images/LogosIcons/word-icon-memories.png";
