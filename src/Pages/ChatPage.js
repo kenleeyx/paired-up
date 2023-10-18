@@ -47,7 +47,7 @@ export default function ChatPage() {
     <div className="h-screen">
       <NavBar label="Chat" />
       <main
-        className="mb-[50px] h-auto w-screen pt-[80px]"
+        className="mb-[50px] h-screen bg-cover bg-center bg-no-repeat pt-[80px]"
         style={
           backgroundImage
             ? { backgroundImage: `url(${backgroundImage})` }
