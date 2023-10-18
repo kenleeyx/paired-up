@@ -99,22 +99,26 @@ const NextDate = () => {
   }, [dateList]);
 
   return (
-    <NavLink
-      to="/dates"
-      className="j mt-[90px] flex w-3/4 min-w-[20em] max-w-[30em] flex-row items-center rounded-xl bg-window bg-opacity-80 p-2 text-accent shadow-xl hover:translate-y-[-2px] hover:scale-[1.05] hover:bg-opacity-95"
-    >
+    <>
       {date && (
-        <div key={date.key} className="w-full ">
-          <h1 className="text-center text-xl font-bold ">Next Date:</h1>
-          <h1 className="text-center text-xl font-bold">
-            {formattedDate(date.val.startTime)}
-          </h1>
-          <h1 className="w-full px-2 text-center font-bold">
-            {date.val.title}
-          </h1>
-        </div>
+        <NavLink
+          to="/dates"
+          className="j mt-[90px] flex w-3/4 min-w-[20em] max-w-[30em] flex-row items-center rounded-xl bg-window bg-opacity-80 p-2 text-accent shadow-xl hover:translate-y-[-2px] hover:scale-[1.05] hover:bg-opacity-95"
+        >
+          <div
+            key={date.key}
+            className="flex w-full flex-col items-center text-xl"
+          >
+            <h1 className="font-bold">Next Date:</h1>
+            <p>
+              <hr className="my-[5px] w-full rounded-full border-[1px] border-accent" />
+              {formattedDate(date.val.startTime)}
+            </p>
+            <p>{date.val.title}</p>
+          </div>
+        </NavLink>
       )}
-    </NavLink>
+    </>
   );
 };
 

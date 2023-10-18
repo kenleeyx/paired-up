@@ -57,11 +57,55 @@ Contributors: Ignatius Tan, Gabriel Lim, Kenneth Lee
 
 (Login as user 2 - Email carl.fredricksen@pixar.com Pass paradisefalls)
 
-- Bucket List
-- Dates
 - Journal
--
-- add to memories -> handover to kenneth
+  (iggy)
+  Title: Hammer time!
+  Text: When fixing up the house with Ellie, I was hammering nails for the floor board.
+  Thump thump, BAM! I hit my finger with the hammer on accident. So much pain!
+  Sign off: Put todays date.
+  big thumbs down
+  Feeling: sick
+  date: 2023 aug 20
+
+  (gabriel - ellie)
+  Title: 🎈🎈🎈🎈Carl bought me a balloon!!!!🎈🎈🎈🎈
+  Text: Love it! Maybe we could build a house
+  Sign off: Happiest princess!
+  Feeling: happy
+  date: 2023 july 23
+
+- Bucket-List
+  (iggy)
+  Title: Paradise Island!
+  Items: Sight seeing, Take photos together, Build a house, Stay there forever
+  Date: 2029 Dec 30th
+
+  (gabriel)
+  Title: Flowers to grow
+  Items: Tulips, Violets, Dandelions, Orchids, Morning Glory
+
+- Dates
+  (gabriel - ellie)
+  title: Picnic in the park!!!
+  Items: picnic mat, picnic basket, cheese, bees!
+  Date: 2023 Nov 18 - 12pm to 3pm
+
+  title: Ghost hunting
+  Items: camera, torchlight, ghosts
+  Date: 2023 June 17 - 12am to 5am
+
+  title: Dinner @ Sentosa
+  Items: beach wear, sun hat, towels
+  Date: 2023 April 16 - 7pm to 10pm
+
+(iggy -carl)
+title: Water theme park
+Items: sunglasses, sunscreen, swimsuit, towel, change of clothes
+Date: sat - 10am to 5pm
+
+show homepage dates then
+
+- add water theme park to memories -> handover to kenneth
 
 ## Demo - Kenneth
 
