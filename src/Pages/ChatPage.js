@@ -1,13 +1,17 @@
-import { NavLink } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../App.js";
+//-----------React-----------//
+import { useState, useEffect } from "react";
+
+//-----------Firebase-----------//
+import { database } from "../firebase/firebase";
+import { ref, onValue } from "firebase/database";
+
+//-----------Components-----------//
 import NavBar from "../Details/NavBar.js";
 import { ChatComposer } from "../Components/Chat/ChatComposer";
 import { Chat } from "../Components/Chat/Chat";
-import { database } from "../firebase/firebase";
-import { ref, onValue } from "firebase/database";
-import background from "../Images/wallpaper.png";
 import ContextHelper from "../Components/Helpers/ContextHelper.js";
+
+//-----------Media-----------//
 
 export default function ChatPage() {
   //Pull in context from App.js asd
@@ -43,7 +47,7 @@ export default function ChatPage() {
     <div className="h-screen">
       <NavBar label="Chat" />
       <main
-        className="mb-[50px] mt-[100px] h-auto w-screen"
+        className="mb-[50px] h-auto w-screen pt-[80px]"
         style={
           backgroundImage
             ? { backgroundImage: `url(${backgroundImage})` }
@@ -51,6 +55,7 @@ export default function ChatPage() {
         }
       >
         <Chat chat={chat} />
+        <p className="pt-[85px] text-transparent">blank</p>
         <ChatComposer />
       </main>
     </div>

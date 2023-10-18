@@ -24,8 +24,8 @@ export function MultiFileComposer(props) {
   // Variables
   const DUMMY_USERID = ContextHelper("displayName");
   const DUMMY_PAIRID = ContextHelper("pairKey");
-
   const [formInfo, setFormInfo] = useState({
+    id: props.id,
     postMessage: props.postContent ? props.postContent.val.message : "",
     date: props.postContent ? props.postContent.val.date : null,
     tags: props.postContent ? props.postContent.val.tags : "",
@@ -202,7 +202,7 @@ export function MultiFileComposer(props) {
           className="input mb-2 w-[250px] bg-white text-sm"
         />
         <label
-          htmlFor="upload-image"
+          htmlFor={"upload" + formInfo.id}
           style={{ cursor: "pointer" }}
           className=" m-1 flex h-[48px] w-[170px] flex-row items-center justify-center
  rounded-lg bg-slate-300 px-2 text-[14px] font-semibold shadow-lg hover:translate-y-[-2px] hover:bg-slate-400"
@@ -216,7 +216,7 @@ export function MultiFileComposer(props) {
         </label>
         <input
           type="file"
-          id="upload-image"
+          id={"upload" + formInfo.id}
           className="display: none"
           accept="image/*"
           style={{ display: "none" }}
@@ -227,16 +227,40 @@ export function MultiFileComposer(props) {
         />
       </form>
       <Button
-        label="Create Post!"
+        label="Post!"
         handleClick={() => {
           writeData();
           closeComposerModal();
         }}
       />
       {props.postContent ? (
-        <button id="deletePost" onClick={(e) => handleDelete(e)}>
-          Delete Post
-        </button>
+        <>
+          <button
+            className=" z-10 ml-auto rounded-md bg-background px-[5px]"
+            onClick={() => document.getElementById("deletePost").showModal()}
+          >
+            Delete
+          </button>
+
+          <dialog id="deletePost" className="modal ">
+            <div className="modal-box flex-col justify-center bg-background p-[20px] text-center">
+              <form method="dialog">
+                <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
+                  ✕
+                </button>
+                <h3 className="text-lg font-bold">
+                  Are you sure you want to delete this memory?
+                </h3>
+                <button
+                  className="btn m-[20px] bg-red-700 text-white hover:bg-red-900"
+                  onClick={(e) => handleDelete(e)}
+                >
+                  Confirm
+                </button>
+              </form>
+            </div>
+          </dialog>
+        </>
       ) : null}
     </div>
   );

@@ -1,9 +1,11 @@
+//-----------Componets-----------//
 import { Message } from "./Message";
 import ContextHelper from "../Helpers/ContextHelper";
 
 //<Chat chat={chat} />
 export function Chat(props) {
   const userEmail = ContextHelper("email");
+
   const messages = props.chat.map((chatMessage, index) => {
     return (
       <Message
