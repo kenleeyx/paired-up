@@ -35,9 +35,14 @@ export default function SettingsPage() {
   const pairKey = ContextHelper("pairKey");
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   useEffect(() => {
     //pull profile pic when component mounts
     const email = "demo1@email.com"; // use temporary dummy email; this will be pulled from context in future
+=======
+  
+  useEffect(() => { //pull profile pic when component mounts
+>>>>>>> 323c5a2403c5b1a792cad2c733a57b1996727457
     const userRef = ref(database, `userRef`); //setup reference
     onValue(userRef, (data) => {
       const val = data.val();
@@ -97,8 +102,12 @@ export default function SettingsPage() {
   };
 
   const updateBackgroundPicture = (e) => {
+<<<<<<< HEAD
     const pairKey = "dummypair"; // for testing, to remove later
     if (!backgroundPicture) {
+=======
+    if(!backgroundPicture) {
+>>>>>>> 323c5a2403c5b1a792cad2c733a57b1996727457
       return;
     }
     console.log("updating background pic");
@@ -121,8 +130,12 @@ export default function SettingsPage() {
   };
 
   const updateStartDate = () => {
+<<<<<<< HEAD
     const pairKey = "dummypair"; // for testing, to remove later
     if (!startDate) {
+=======
+    if(!startDate) {
+>>>>>>> 323c5a2403c5b1a792cad2c733a57b1996727457
       return;
     }
     console.log("updating start date");

@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion-3d";
 
 //-----------Firebase-----------//
-import { auth } from "../firebase/firebase.js";
+import { database, auth } from "../firebase/firebase.js";
+import { ref, onValue } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
 
 //-----------Components-----------//
@@ -17,6 +18,7 @@ import AppButton from "../Details/AppButton.js";
 import CoupleDetails from "../Components/Home/CoupleDetails.js";
 import NextDate from "../Components/Home/NextDate.js";
 import StateHelper from "../Components/Helpers/StateHelper.js";
+import ContextHelper from "../Components/Helpers/ContextHelper.js";
 
 //-----------Media-----------//
 import logo from "../Images/LogosIcons/logo.png";
@@ -30,7 +32,10 @@ import timeCapsule from "../Images/LogosIcons/word-icon-timecapsule.png";
 import journal from "../Images/LogosIcons/word-icon-journal.png";
 
 export default function HomePage() {
+  //states
   const [profilePicture, setProfilePicture] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState(null);
+  const pairKey = ContextHelper("pairKey");
 
   const navigate = useNavigate();
   // const isLoggedIn = ContextHelper("isLoggedIn");
@@ -42,6 +47,17 @@ export default function HomePage() {
       setProfilePicture(user.photoURL);
     }
   }, []);
+
+  useEffect(() => {
+  if (pairKey) {
+    const userRef = ref(database, `rooms/${pairKey}/backgroundImage`); //setup reference
+    onValue(userRef, (result) => {
+      const val = result.val()
+      if (val) {
+      setBackgroundImage(val.backgroundImageURL);
+      }
+    });
+  }},[pairKey])
 
   // Redirect to sign in
   useEffect(
@@ -79,7 +95,7 @@ export default function HomePage() {
         </NavLink>
       </nav>
       <main
-        style={{ backgroundImage: `url(${background})` }}
+        style={{ backgroundImage: `url(${backgroundImage})` }}
         className=" flex h-full w-screen flex-col items-center justify-between bg-background bg-cover bg-center bg-no-repeat"
       >
         <NextDate />
