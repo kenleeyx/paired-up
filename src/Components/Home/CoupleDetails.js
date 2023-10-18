@@ -1,5 +1,7 @@
 //-----------React-----------//
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+
 //-----------Firebase-----------//
 import { auth, database } from "../../firebase/firebase";
 import {
@@ -10,10 +12,13 @@ import {
   orderByChild,
   equalTo,
 } from "firebase/database";
+//-----------Components-----------//
+import ContextHelper from "../Helpers/ContextHelper";
+
 //-----------Media-----------//
 import heart from "../../Images/heart.gif";
-import ContextHelper from "../Helpers/ContextHelper";
-import { NavLink } from "react-router-dom";
+import person1 from "../../Images/LogosIcons/person1.png";
+import person2 from "../../Images/LogosIcons/person2.png";
 
 const CoupleDetails = () => {
   //Import display photos
@@ -63,7 +68,7 @@ const CoupleDetails = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, []);
+  }, [pairKey]);
 
   //Pull start date from couple's room
   useEffect(() => {
@@ -79,7 +84,7 @@ const CoupleDetails = () => {
         }
       });
     }
-  });
+  }, [pairKey]);
 
   //Calculate number of days together
   const daysTogether = (startDate) => {
@@ -94,22 +99,22 @@ const CoupleDetails = () => {
     <article className="flex w-1/2 min-w-[16em] max-w-[28em] flex-col items-center rounded-xl bg-white bg-opacity-80 p-2 shadow-lg hover:translate-y-[-2px] hover:shadow-window ">
       <div className="flex flex-row">
         <img
-          src={profilePicture1}
+          src={profilePicture1 ? profilePicture1 : person1}
           alt="person1"
-          className="h-[4em] w-[4em] rounded-full"
+          className="h-[4em] w-[4em] rounded-full object-contain"
         />
         <img src={heart} alt="heartbeat" className=" h-[4em] w-[4em]"></img>
         <img
-          src={profilePicture2}
+          src={profilePicture2 ? profilePicture2 : person2}
           alt="person2"
-          className="h-[4em] w-[4em] rounded-full"
+          className="h-[4em] w-[4em] rounded-full object-contain"
         />
       </div>
 
       {pairKey ? (
         <>
           <h1 className="text-center text-[0.8em] sm:text-[1em]">
-            {displayName1} & {displayName2}
+            {displayName1 + " & " + displayName2}
           </h1>
 
           <h1 className="text-center text-[2em] font-bold leading-none sm:text-[2.6em]">

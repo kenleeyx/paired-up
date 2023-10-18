@@ -100,11 +100,11 @@ const NextDate = () => {
 
   return (
     <>
-      {date && (
-        <NavLink
-          to="/dates"
-          className="j mt-[90px] flex w-3/4 min-w-[20em] max-w-[30em] flex-row items-center rounded-xl bg-window bg-opacity-80 p-2 text-accent shadow-xl hover:translate-y-[-2px] hover:scale-[1.05] hover:bg-opacity-95"
-        >
+      <NavLink
+        to="/dates"
+        className="j mt-[90px] flex w-3/4 min-w-[20em] max-w-[30em] flex-row items-center rounded-xl bg-window bg-opacity-80 p-2 text-accent shadow-xl hover:translate-y-[-2px] hover:scale-[1.05] hover:bg-opacity-95"
+      >
+        {date ? (
           <div
             key={date.key}
             className="flex w-full flex-col items-center text-xl"
@@ -116,8 +116,12 @@ const NextDate = () => {
             </p>
             <p>{date.val.title}</p>
           </div>
-        </NavLink>
-      )}
+        ) : (
+          <div className="flex w-full items-center justify-center text-xl">
+            <p>No Upcoming Dates</p>
+          </div>
+        )}
+      </NavLink>
     </>
   );
 };
