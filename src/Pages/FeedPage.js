@@ -23,7 +23,7 @@ export default function FeedPage() {
     <div className=" flex min-h-screen w-screen flex-col items-center justify-center bg-background">
       <NavBar src={memoriesimage} />
       {isLoggedIn && (
-        <nav className="fixed bottom-5 z-10 flex h-12 scale-90 flex-row items-center justify-center rounded-lg bg-white shadow-lg sm:translate-x-0 sm:scale-100">
+        <nav className="fixed bottom-5 z-10 flex h-12 scale-[0.75] flex-row items-center justify-center rounded-lg bg-white shadow-lg sm:translate-x-0 sm:scale-100">
           <CreateButton
             handleClick={() => document.getElementById("composer").showModal()}
           />

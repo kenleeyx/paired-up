@@ -27,7 +27,7 @@ export function FilterButton(props) {
   return (
     <button
       onClick={handleFilterButton}
-      className={`mx-1 rounded bg-text px-2 text-sm ${
+      className={`text-md mx-1 rounded bg-text px-2 ${
         isClicked && `border-2 border-accent`
       }`}
       key={props.filterTag}

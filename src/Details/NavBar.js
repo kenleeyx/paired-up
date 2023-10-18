@@ -14,10 +14,10 @@ const NavBar = ({ nav, label, src }) => {
           ←
         </NavLink>
       )}
-
-      {label && <p className="text-[1.6em]">{label}</p>}
-      {src && <img src={src} alt="Header" className="h-[5em]" />}
-      <StateHelper />
+      {label && <p className="text-[1.5em]">{label}</p>}
+      {src && <img src={src} alt="Header" className="h-[4em] sm:h-[5em]" />}
+      {/* <StateHelper /> */}
+      <p className="text-transparent">123</p>
     </header>
   );
 };
