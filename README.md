@@ -6,6 +6,8 @@ Contributors: Ignatius Tan, Gabriel Lim, Kenneth Lee
 
 Your love story - all in one place! Relationships should be simple - paired up makes it easy for couples to plan dates, set goals, record memories and share their thoughts in a safe space. 
 
+![PairedUp-Onboarding](https://github.com/gbrllim/paired-up/assets/60804089/fdf8f443-ad16-4c51-90b6-932bc6af67c0)![PairedUp-Home](https://github.com/gbrllim/paired-up/assets/60804089/8699137f-804e-41e6-9c11-adc46360cd26)
+
 ## Tech Stack [To update]
 
 **Frontend**
@@ -51,6 +53,7 @@ Your love story - all in one place! Relationships should be simple - paired up m
 
 - Google Cal API Setup in Firebase https://developers.google.com/calendar/api/quickstart/js
 - Framer Motion text animations https://dev.to/chetanvermaa/how-to-create-awesome-text-animation-with-framer-motion-1cki
+- Netlify routing bug https://answers.netlify.com/t/support-guide-i-ve-deployed-my-site-but-i-still-see-page-not-found/125?utm_source=404page&utm_campaign=community_tracking
 
 # Launching
 
