@@ -30,15 +30,15 @@ Your love story - all in one place! Relationships should be simple - paired up m
 - Kanban Board - Notion
 - Wireframing & User Flows - Miro https://miro.com/app/board/uXjVNfSbv-c=/
 - Communication - Slack
-- Designing - (iggy to add)
+- Designing - illustrator
 
 ## Core Features
 
 - Dates - [To update] Plan dates together in advance & add to your calendar instantly
 - Chat - [To update] Private chatroom with your significant other! Share your favourite memories together
 - Feed - [To update] All in one
-- Bucket List - [To update]
-- Journal - [To update]
+- Bucket List - [To update] Have a bucket list of things you want to do with your significant other
+- Journal - [To update] Jolt down in this journal feature so both you and your significant other can read and learn how they feel on that day
 
 ## Future Enhancements
 
