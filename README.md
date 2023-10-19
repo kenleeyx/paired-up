@@ -4,38 +4,50 @@ Contributors: Ignatius Tan, Gabriel Lim, Kenneth Lee
 
 # Paired Up - Couples App
 
-[To update] App description in one sentence
+Your love story - all in one place! Relationships should be simple - paired up makes it easy for couples to plan dates, set goals, record memories and share their thoughts in a safe space. 
 
 ## Tech Stack [To update]
 
+**Frontend**
 - React.JS
 - TailwindCSS
 - Daisy UI
-- Google Calendar API
 - React Router
 - Framer Motion
+
+**Backend**
+- Firebase Database
+- Firebase Storage
+- Firebase Auth
+  
+**Hosting**
+- Netlify
 
 ## Project Management
 
 - Kanban Board - Notion
-- Wireframing & User Flows - Miro
+- Wireframing & User Flows - Miro https://miro.com/app/board/uXjVNfSbv-c=/
 - Communication - Slack
 - Designing - (iggy to add)
 
-## Core Features [To update]
+## Core Features
 
 - Dates - [To update] Plan dates together in advance & add to your calendar instantly
 - Chat - [To update] Private chatroom with your significant other! Share your favourite memories together
 - Feed - [To update] All in one
 - Bucket List - [To update]
-- Time Capsule - [To update]
 - Journal - [To update]
 
-## Future Enhancements [To update]
+## Future Enhancements
 
-- [To update]
+- Calendar UI to display upcoming dates
+- Data privacy
+- iOS and Android support
+- Multiple chats
+- Support for groups of friends instead of just couples
+- Customisable color schemes
 
-# Resources Used [To update]
+# Resources Used
 
 - Google Cal API Setup in Firebase https://developers.google.com/calendar/api/quickstart/js
 - Framer Motion text animations https://dev.to/chetanvermaa/how-to-create-awesome-text-animation-with-framer-motion-1cki
