@@ -42,7 +42,7 @@
   Feeling: sick
   date: 2023 aug 20
 
-  (gabriel - ellie)
+  (Iggy - ellie)
   Title: 🎈🎈🎈🎈Carl bought me a balloon!!!!🎈🎈🎈🎈
   Text: Love it! Maybe we could build a house
   Sign off: Happiest princess!
@@ -56,16 +56,16 @@
   Date: 2029 Dec 30th
 
   (gabriel)
-  Title: Flowers to grow
+  Title: Build my floral paradise! 🌸
   Items: Tulips, Violets, Dandelions, Orchids, Morning Glory
 
 - Dates
   (gabriel - ellie)
-  title: Picnic in the park!!!
+  title: Picnic in the park!!! 🧺
   Items: picnic mat, picnic basket, cheese, bees!
   Date: 2023 Nov 18 - 12pm to 3pm
 
-  title: Ghost hunting
+  title: Ghost hunting 👻
   Items: camera, torchlight, ghosts
   Date: 2023 June 17 - 12am to 5am
 
@@ -86,6 +86,9 @@ show homepage dates then
 
 (Login as user 2 - Email carl.fredricksen@pixar.com Pass 123456)
 
+Chat Gab: I'll be busy with work at the zoo today
+Honey! Don't forget to hang up the laundry
+
 - Memories
   -Create new picnic post with multiple images and tag picnic and dates
   -Scroll through the carousel
@@ -101,18 +104,18 @@ show homepage dates then
 
 Challenges Faced
 
-Modal 
+Modal
 -Modals are present even when not displayed - their properties can be changed
 -Bugs from Referencing modals by ID - single most time consuming source of bugs
 -document.getElementById
--label htmlFor 
+-label htmlFor
 -Unique element IDs are important!!
 -5 composers overlaid so it looks like 1 - edit top one only - all data going to right place but editing wrong modal
 
 Standardized components
--Text boxes with rounded edges? 
--Align center or align left? 
--Navbar on every page? How tall? 
+-Text boxes with rounded edges?
+-Align center or align left?
+-Navbar on every page? How tall?
 -Dealing with absolute positioned components can be troublesome
 -Retro-synchronization could be avoided
 
@@ -134,4 +137,3 @@ Data structures
 Creating rooms
 -Signup - How do we ensure we don’t have random people joining rooms not intended for them?
 -How do we ensure only the intended 2nd user joins the 1st user’s room?
-

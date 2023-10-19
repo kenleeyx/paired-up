@@ -44,7 +44,7 @@ export default function ChatPage() {
   }, [pairKey]);
 
   return (
-    <div className="h-screen">
+    <div className="">
       <NavBar label="Chat" />
       <main
         className="mb-[50px] h-screen bg-cover bg-center bg-no-repeat pt-[80px]"

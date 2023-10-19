@@ -237,12 +237,14 @@ export function MultiFileComposer(props) {
         <>
           <button
             className=" z-10 ml-auto rounded-md bg-background px-[5px]"
-            onClick={() => document.getElementById("deletePost").showModal()}
+            onClick={() =>
+              document.getElementById("delete" + formInfo.id).showModal()
+            }
           >
             Delete
           </button>
 
-          <dialog id="deletePost" className="modal ">
+          <dialog id={"delete" + formInfo.id} className="modal ">
             <div className="modal-box flex-col justify-center bg-background p-[20px] text-center">
               <form method="dialog">
                 <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">

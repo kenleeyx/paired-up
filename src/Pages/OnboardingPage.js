@@ -20,7 +20,7 @@ export default function Onboarding() {
     try {
       const userInfo = await signInWithEmailAndPassword(
         auth,
-        "demo-1@email.com",
+        "carl@email.com",
         "123456",
       );
       if (userInfo) {
