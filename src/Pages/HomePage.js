@@ -39,10 +39,12 @@ export default function HomePage() {
 
   //Pull user data
   useEffect(() => {
+    auth.authStateReady().then(() => {
     const user = auth.currentUser;
     if (user !== null) {
       setProfilePicture(user.photoURL);
     }
+  });
   }, []);
 
   useEffect(() => {

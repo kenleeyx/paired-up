@@ -237,6 +237,11 @@ export default function SettingsPage() {
               document.getElementById("delete_modal").showModal()
             }
           />
+          
+          <br />
+          <div className = 'flex flex-row text-xs'><p className = 'font-bold text-center'>Email:&nbsp;</p> {email}</div>
+          <div className = 'flex flex-row text-xs'><p className = 'font-bold text-center'>Pair Key:&nbsp;</p> {pairKey}</div>
+
           <dialog id="delete_modal" className="modal ">
             <div className="modal-box bg-slate-100">
               <form method="dialog">
