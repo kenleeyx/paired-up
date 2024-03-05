@@ -1,4 +1,5 @@
 # Rocket Academy Project 2: Full-Stack Application (Firebase)
+[Link to deployed app](https://paired-up.netlify.app/)
 
 Contributors: Ignatius Tan, Gabriel Lim, Kenneth Lee
 
