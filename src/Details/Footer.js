@@ -4,7 +4,7 @@ const Footer = () => {
       📍 Made with love, Singapore{" "}
       <a
         className="font-bold text-yellow-600"
-        href="https://github.com/gbrllim/paired-up"
+        href="https://github.com/kenleeyx/paired-up"
       >
         Github
       </a>
